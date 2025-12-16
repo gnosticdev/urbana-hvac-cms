@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "urbana-hvac-cms",
+  "name": "payload-cms-cloudflare-template",
   "compatibility_date": "2025-08-15",
   "compatibility_flags": [
     // Enable Node.js API
@@ -18,9 +18,9 @@
   "d1_databases": [
     {
       "binding": "D1",
-      "database_id": "74d31607-9ebc-4b7f-8fcd-51e03c12e238",
-      "database_name": "urbana-hvac",
-      "remote": true,
+      "database_id": "<DB_ID>",  // TODO: Add the database id here
+      // "database_name": "<DB_NAME>",  // TODO: Add the database name here
+      "remote": true, // TODO: Set to false if you want to use a local database
     },
   ],
   "services": [
@@ -33,7 +33,8 @@
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "urbana-hvac-images","preview_bucket_name": "urbana-hvac-images",
+      "bucket_name": "<BUCKET_NAME>", // TODO: Add the bucket name here
+      "preview_bucket_name": "<PREVIEW_BUCKET_NAME>", // TODO: Add the preview bucket name here
     },
     // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
     // {
@@ -44,35 +45,36 @@
 
   // Here's how to configure an additional environment
   // It can be deployed with `CLOUDFLARE_ENV=staging pnpm run deploy`
-  // "env": {
-  //   "staging": {
-  //     "name": "my-app-staging",
-  //     "d1_databases": [
-  //       {
-  //         "binding": "D1",
-  //         "database_id": "DATABASE_ID",
-  //         "database_name": "my-app-staging",
-  //         "remote": true
-  //       }
-  //     ],
-  //     "services": [
-  //       // The service should match the "name" of your worker
-  //       // {
-  //       //   "binding": "WORKER_SELF_REFERENCE",
-  //       //   "service": "my-app-staging"
-  //       // },
-  //     ],
-  //     "r2_buckets": [
-  //       {
-  //         "binding": "R2",
-  //         "bucket_name": "my-app-staging"
-  //       }
-  //       // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
-  //       // {
-  //       //   "binding": "NEXT_INC_CACHE_R2_BUCKET",
-  //       //   "bucket_name": "<BUCKET_NAME>",
-  //       // },
-  //     ]
-  //   }
-  // }
+  "env": {
+    "staging": {
+      "name": "<ENV_NAME>-staging", // TODO: Add the environment name here
+      "d1_databases": [
+        {
+          "binding": "D1",
+          "database_id": "<DB_ID>", // TODO: Add the database id here
+          "database_name": "<DB_NAME>", // TODO: Add the database name here
+          "remote": true
+        }
+      ],
+      "services": [
+        // The service should match the "name" of your worker
+        // {
+        //   "binding": "WORKER_SELF_REFERENCE",
+        //   "service": "my-app-staging"
+        // },
+      ],
+      "r2_buckets": [
+        {
+          "binding": "R2",
+          "bucket_name": "<BUCKET_NAME>", // TODO: Add the bucket name here
+          "preview_bucket_name": "<PREVIEW_BUCKET_NAME>", // TODO: Add the preview bucket name here
+        }
+        // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
+        // {
+        //   "binding": "NEXT_INC_CACHE_R2_BUCKET",
+        //   "bucket_name": "<BUCKET_NAME>",
+        // },
+      ]
+    }
+  }
 }
